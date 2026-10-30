@@ -1,0 +1,15 @@
+# debian
+debian/edi-btrfs-tools/
+debian/edi-btrfs-tools.*.debhelper
+debian/debhelper-build-stamp
+debian/edi-btrfs-tools.debhelper.log
+debian/edi-btrfs-tools.substvars
+debian/.debhelper
+debian/files
+
+# development IDEs
+.idea/
+
+# man page
+/man/edi-btrfs-tools.1
+/man/edi-btrfs-tools.1.html

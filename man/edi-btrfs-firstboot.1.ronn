@@ -1,0 +1,19 @@
+edi-btrfs-firstboot(1) -- Embedded Development Infrastructure BTRFS Rootfs Tools
+================================================================================
+
+## SYNOPSIS
+
+`edi-btrfs-firstboot`
+
+## DESCRIPTION
+
+Small utility that helps to adjust the btrfs snapshots on the first boot.
+
+## COPYRIGHT
+
+**edi-btrfs-firstboot** is copyright (c) 2026, Matthias Luescher. Released
+under the GNU Lesser General Public License.
+
+## SEE ALSO
+
+https://www.get-edi.io

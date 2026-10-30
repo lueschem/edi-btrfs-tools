@@ -1,0 +1,15 @@
+Source: edi-btrfs-tools
+Section: devel
+Priority: optional
+Build-Depends: debhelper (>= 10),
+               ronn,
+Maintainer: Matthias Luescher <lueschem@gmail.com>
+Standards-Version: 3.9.8
+
+Package: edi-btrfs-tools
+Architecture: all
+Depends: ${misc:Depends},
+         btrfs-progs,
+         systemd
+Description: Embedded Development Infrastructure BTRFS Tools
+ Small utility that helps to handle btrfs snapshots e.g. on first boot.
