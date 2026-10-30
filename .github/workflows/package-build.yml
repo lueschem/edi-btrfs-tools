@@ -2,7 +2,7 @@ name: edi-btrfs-tools package build
 on:
   push:
     branches:
-      - master
+      - main
       - develop
 
 jobs:

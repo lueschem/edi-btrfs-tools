@@ -36,7 +36,7 @@ source build-info
 
 sudo gem install package_cloud
 
-if [ "${GIT_BRANCH}" != "master" ]
+if [ "${GIT_BRANCH}" != "main" ]
 then
     REPOSITORY_SUFFIX="-develop"
 else

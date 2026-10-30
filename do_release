@@ -51,7 +51,7 @@ git commit -m "New version ${NEW_VERSION}."
 git flow release start ${NEW_VERSION}
 git flow release finish
 
-git push origin master
+git push origin main
 git push origin develop
 git push --tags
 
