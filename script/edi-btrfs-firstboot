@@ -44,23 +44,36 @@ if [ "${ROOTFS_TYPE}" != "btrfs" ] ; then
     exit 0
 fi
 
-SNAPSHOT="$(btrfs subvolume get-default /)"
-SNAPSHOT="${SNAPSHOT##* }"
-if [ "${SNAPSHOT}" != "factory" ] ; then
-    echo "No snapshot needed, root ${CURRENT_ROOT_DEVICE} already got snapshot ${SNAPSHOT}."
+SNAPSHOT_RO="$(btrfs property get -t subvol / | awk -F'=' '/^ro=/ {print $2}')"
+if [ "${SNAPSHOT_RO}" == "false" ] ; then
+    echo "No snapshot needed, root ${CURRENT_ROOT_DEVICE} is already writable."
     exit 0
 else
+    DEFAULT_SUBVOLUME="$(btrfs subvolume get-default /)"
+    DEFAULT_SUBVOLUME="${DEFAULT_SUBVOLUME##* }"
+    CURRENT_SUBVOLUME="$(btrfs subvolume show / | head -n 1)"
     ROOT_MOUNT="/mnt"
     RW_SNAPSHOT="@"
-    echo "Snapshot needed, root ${CURRENT_ROOT_DEVICE}: ${SNAPSHOT} --> ${RW_SNAPSHOT}."
+
+    if [ "${CURRENT_SUBVOLUME}" == "${RW_SNAPSHOT}" ] ; then
+        >&2 echo "Error: Current subvolume ${CURRENT_SUBVOLUME} conflicts with target snapshot ${RW_SNAPSHOT}."
+        exit 1
+    fi
+
+    if [ "${CURRENT_SUBVOLUME}" != "${DEFAULT_SUBVOLUME}" ] ; then
+        >&2 echo "Error: Current subvolume ${CURRENT_SUBVOLUME} does not match default subvolume ${DEFAULT_SUBVOLUME}."
+        exit 1
+    fi
+
+    echo "Snapshot needed, root ${CURRENT_ROOT_DEVICE}: ${DEFAULT_SUBVOLUME} --> ${RW_SNAPSHOT}."
     mount -t btrfs -o subvolid=5 "${CURRENT_ROOT_DEVICE}" "${ROOT_MOUNT}"
     if [ -e "${ROOT_MOUNT}"/"${RW_SNAPSHOT}" ] ; then
         btrfs subvolume delete --commit-after "${ROOT_MOUNT}"/"${RW_SNAPSHOT}"
     fi
-    btrfs subvolume snapshot "${ROOT_MOUNT}"/"${SNAPSHOT}" "${ROOT_MOUNT}"/"${RW_SNAPSHOT}"
+    btrfs subvolume snapshot "${ROOT_MOUNT}"/"${DEFAULT_SUBVOLUME}" "${ROOT_MOUNT}"/"${RW_SNAPSHOT}"
     btrfs subvolume set-default "${ROOT_MOUNT}"/"${RW_SNAPSHOT}"
 
-    echo "Rebooting system to apply writable snapshot..."
+    echo "Rebooting system to apply writable subvolume..."
     /usr/bin/systemctl reboot --no-block
 fi
 
