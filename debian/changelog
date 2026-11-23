@@ -1,3 +1,10 @@
+edi-btrfs-tools (1.1.0) resolute; urgency=medium
+
+  * Make naming of read only subvolume more flexible.
+  * Added the Mender update module btrfs-rootfs-image.
+
+ -- Matthias Luescher <lueschem@gmail.com>  Mon, 23 Nov 2026 22:31:50 +0100
+
 edi-btrfs-tools (1.0.2) resolute; urgency=medium
 
   * Renamed master branch to main branch.

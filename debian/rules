@@ -11,4 +11,5 @@ override_dh_installinit:
 override_dh_auto_build:
 	dh_auto_build
 	ronn man/edi-btrfs-firstboot.1.ronn
+	ronn man/btrfs-rootfs-image.1.ronn
 
