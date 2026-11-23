@@ -1,2 +1,3 @@
 script/edi-btrfs-firstboot /usr/bin/
+script/btrfs-rootfs-image /usr/share/mender/modules/v3/
 

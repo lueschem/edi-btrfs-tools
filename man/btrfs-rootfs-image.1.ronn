@@ -1,0 +1,19 @@
+btrfs-rootfs-image(1) -- Embedded Development Infrastructure BTRFS Rootfs Tools
+===============================================================================
+
+## SYNOPSIS
+
+`btrfs-rootfs-image`
+
+## DESCRIPTION
+
+Mender update module script that deals with btrfs subvolumes and subvolume increments.
+
+## COPYRIGHT
+
+**btrfs-rootfs-image** is copyright (c) 2026, Northern.tech AS. Modifications are copyright (c) 2026, Matthias Luescher.
+Released under the Apache License, Version 2.0.
+
+## SEE ALSO
+
+https://github.com/mendersoftware/mender/blob/master/support/modules/rootfs-image

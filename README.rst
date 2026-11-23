@@ -9,6 +9,7 @@ License
 +++++++
 
 edi-btrfs-tools is licensed under the LGPL license.
+The Mender update module btrfs-rootfs-image is licensed under the Apache License, Version 2.0.
 
 Contributions
 +++++++++++++
